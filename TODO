@@ -1,0 +1,12 @@
+TODO
+*-criar função para procurar X linhas em todos os arquivos se não encontar julgar o sistema vuln HSTS,content type,x-frame options...
+*-fazer interface web usando lib mongoose para HTTPd +datatables + syntax highlight para mostrar linhas que estão vuln...
+*-opção de ver raw "TXT" exemplo: 
+---
+Arquivo: path/blah
+Linhas: 1,2,4,65,34
+1  code
+2  code
+4  code 
+...
+---
