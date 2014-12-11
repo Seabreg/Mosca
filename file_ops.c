@@ -2,6 +2,43 @@
 #include "mem_ops.h"
 #include "string_ops.h"
 
+int char_type_counter(char *string,char type)
+{
+	int counter=0;
+ 
+	while(*string != '\0')
+	{
+		if(*string==type) 
+			counter++;
+		string++;
+	}
+  
+	return counter;
+}
+
+char *Dead_Space(char* input)                                                  
+{
+	int i=0,j=0,len=strlen(input),buf=len-char_type_counter(input,' ');
+	char *output=NULL;
+	output = xmalloc(buf*sizeof(char)+1);
+
+	while (i!=len)                       
+	{
+		if (input[i]!=' ')                                                  
+			output[j]=input[i];                                            
+		else
+			j--;   
+		i++;
+		j++;                                                      
+	}
+
+	output[j] ='\0';
+
+	free(output);
+
+	return output;                                                     
+}
+
 int WriteFile(char *file,char *str)
 {
 	FILE *arq;
@@ -86,15 +123,18 @@ char *Search_for(char * NameFile,char *regex)
 
 	char *lineBuffer=xcalloc(1,1); 
 	char line[2048];
+	char linespace[2048];
 	char tmpline[2128];
 	memset(line,0,1023);
 
 	while( fgets(line,1023,arq) )  
 	{
+// remove white spaces of each line...
+		strcpy(linespace,Dead_Space(line));
 		match=match_test(line,regex);
 		if(match)
 		{
-			//fprintf(stdout,"Line: %d - %s \n",count,line);
+// DEBUG("Line: %d - %s \n",count,line);
 			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2128);
 			snprintf(tmpline,2127," Line: %d -  %s",count,line);
 			strncat(lineBuffer,tmpline,2127);
@@ -124,56 +164,65 @@ void fly_to_analyse(char *path, char *config)
 	char *p = ReadLines(config);
 	char *last = p;
 	char *result2=NULL;
-	char title[128],description[128],reference[128],match[128];	
+	char title[128],description[512],reference[512],match[128],relevance[512];	
 	int result=0,sz=0;
-
 
 	while(!result )
 		switch (parse_eggs(&p, &last)) 
 		{
 			case TITLE:
-					sz = p - last - 1;
+					sz = p - last;
 					memset(title,0,127);
 					snprintf(title,127,"%.*s", sz, last);
+// DEBUG("%s\n",title);
 					strcpy(title,ClearStr(title,10));
 				break;
 
-
 			case DESCRIPTION:
 				
- 					sz = p - last - 1;
-					memset(description,0,127);
-					snprintf(description,127,"%.*s", sz, last);
+ 					sz = p - last;
+					memset(description,0,511);
+					snprintf(description,511,"%.*s", sz, last);
 					strcpy(description,ClearStr(description,16));
 				break;
 
 			case REFERENCE:
 
 					sz = p - last - 1;
-					memset(reference,0,127);
-					snprintf(reference,127,"%.*s", sz, last);
+					memset(reference,0,511);
+					snprintf(reference,511,"%.*s", sz, last);
 					strcpy(reference,ClearStr(reference,14));
+				break;
+
+
+			case RELEVANCE:
+
+					sz = p - last;
+					memset(relevance,0,511);
+					snprintf(relevance,511,"%.*s", sz, last);
+					strcpy(relevance,ClearStr(relevance,14));
 				break;
 /*
 TODO* fix bug in parse "::Regex_Match::"
 
 */
 			case MATCH:
-					sz = p - last - 1;
+					sz = p - last;
 					memset(match,0,127);
 					snprintf(match,127,"%.*s", sz, last);
-					strcpy(match,ClearStr(match,16));
+					strcpy(match,ClearStr(match,10));
 
 					if(result2!=NULL)
 					{
-						memset(result2,0,strlen(result2)-1);
+					//	memset(result2,0,strlen(result2)-1);
 					}
 
 					result2=Search_for(path,match);
 
+// TODO need validate before print out
 					if(strlen(result2)>2)
 					{
-						fprintf(stdout,"\n-------------------\n %sTitle:%s  %s  \n %sDescription:%s %s \n %sReference:%s %s \n %sMatch:%s %s  \n%s%s%s\n",YELLOW,LAST,title,YELLOW,LAST,description,YELLOW,LAST,reference,YELLOW,LAST,match,CYAN,result2,LAST);
+						fprintf(stdout,"\n-------------------\n %sTitle:%s  %s  \n %sDescription:%s %s \n %sRelevance:%s %s \n %sReference:%s %s \n %sMatch:%s %s  \n%s%s%s\n",YELLOW,LAST,title,YELLOW,LAST,description,YELLOW,LAST,relevance,YELLOW,LAST,reference,YELLOW,LAST,match,CYAN,result2,LAST);
 
 						if(log_file != NULL)
 						{

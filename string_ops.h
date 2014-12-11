@@ -8,7 +8,7 @@
 #include <limits.h>
 
 enum {
-  TITLE,REFERENCE,DESCRIPTION,MATCH, END
+  TITLE,REFERENCE,DESCRIPTION,RELEVANCE,MATCH, END
 };
 
 char  *ClearStr(char* charBuffer,int num);
