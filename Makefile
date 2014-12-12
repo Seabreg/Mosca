@@ -2,7 +2,7 @@ CC=gcc
 
 #CFLAGS=-W -Wall -Wextra -g
 CFLAGS=-W -Wall -Wextra  -Ofast -fstack-protector-all
-DFLAGS=-D_FORTIFY_SOURCE=1
+#DFLAGS=-D_FORTIFY_SOURCE=2
 
 #LDFLAGS=-lpcre 
 LDFLAGS=-Wl,-z,relro,-z,now -lpcre 

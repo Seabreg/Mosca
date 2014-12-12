@@ -16,29 +16,6 @@ int char_type_counter(char *string,char type)
 	return counter;
 }
 
-char *Dead_Space(char* input)                                                  
-{
-	int i=0,j=0,len=strlen(input),buf=len-char_type_counter(input,' ');
-	char *output=NULL;
-	output = xmalloc(buf*sizeof(char)+1);
-
-	while (i!=len)                       
-	{
-		if (input[i]!=' ')                                                  
-			output[j]=input[i];                                            
-		else
-			j--;   
-		i++;
-		j++;                                                      
-	}
-
-	output[j] ='\0';
-
-	free(output);
-
-	return output;                                                     
-}
-
 int WriteFile(char *file,char *str)
 {
 	FILE *arq;
@@ -67,7 +44,7 @@ int WriteFile(char *file,char *str)
 //read lines of file
 char *ReadLines(char * NameFile)
 {
-	FILE * arq;
+	FILE * arq=NULL;
 
 	arq = fopen(NameFile, "rx");
 
@@ -99,21 +76,21 @@ char *ReadLines(char * NameFile)
 
 	lineBuffer[strlen(lineBuffer)-1]='\0';
 
+	char *tmp=lineBuffer;
 
-	free(lineBuffer);
+	xfree((void **)&lineBuffer);
 
-	return lineBuffer;
+	return tmp;
 }
 
 //read lines of file
 char *Search_for(char * NameFile,char *regex)
 {
 	FILE * arq;
-	int match=0;
-	int count=1;
+	int match=0,count=1;
 
 	arq = fopen(NameFile, "rx");
-
+//DEBUG("regex %s  name file %s \n",regex,NameFile);
 // todo think implement fcntl() ,toctou mitigation...
 	if( arq == NULL )
 	{
@@ -122,23 +99,21 @@ char *Search_for(char * NameFile,char *regex)
 	}
 
 	char *lineBuffer=xcalloc(1,1); 
-	char line[2048];
-	char linespace[2048];
-	char tmpline[2128];
+	char line[2048],tmpline[2128];
 	memset(line,0,1023);
 
 	while( fgets(line,1023,arq) )  
 	{
-// remove white spaces of each line...
-		strcpy(linespace,Dead_Space(line));
+
 		match=match_test(line,regex);
+
 		if(match)
 		{
-// DEBUG("Line: %d - %s \n",count,line);
 			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2128);
 			snprintf(tmpline,2127," Line: %d -  %s",count,line);
 			strncat(lineBuffer,tmpline,2127);
 		}
+
 		count++;
 	}
 
@@ -162,12 +137,14 @@ char *Search_for(char * NameFile,char *regex)
 void fly_to_analyse(char *path, char *config)
 {
 	char *p = ReadLines(config);
-	char *last = p;
+	char *last=p;
 	char *result2=NULL;
 	char title[128],description[512],reference[512],match[128],relevance[512];	
 	int result=0,sz=0;
 
-	while(!result )
+
+
+	while(!result)
 		switch (parse_eggs(&p, &last)) 
 		{
 			case TITLE:
@@ -203,7 +180,7 @@ void fly_to_analyse(char *path, char *config)
 					strcpy(relevance,ClearStr(relevance,14));
 				break;
 /*
-TODO* fix bug in parse "::Regex_Match::"
+TODO* fix bug when test first rule of egg file
 
 */
 			case MATCH:
@@ -212,20 +189,17 @@ TODO* fix bug in parse "::Regex_Match::"
 					snprintf(match,127,"%.*s", sz, last);
 					strcpy(match,ClearStr(match,10));
 
-					if(result2!=NULL)
-					{
-					//	memset(result2,0,strlen(result2)-1);
-					}
 
 					result2=Search_for(path,match);
 
-// TODO need validate before print out
-					if(strlen(result2)>2)
+// TODO* need validate before print out
+					if(strlen(result2)>8)
 					{
 						fprintf(stdout,"\n-------------------\n %sTitle:%s  %s  \n %sDescription:%s %s \n %sRelevance:%s %s \n %sReference:%s %s \n %sMatch:%s %s  \n%s%s%s\n",YELLOW,LAST,title,YELLOW,LAST,description,YELLOW,LAST,relevance,YELLOW,LAST,reference,YELLOW,LAST,match,CYAN,result2,LAST);
 
 						if(log_file != NULL)
 						{
+// TODO* call one time write()... optimize
 							WriteFile(log_file," Path: ");
 							WriteFile(log_file,path);
 							WriteFile(log_file,"\n Module: ");
@@ -250,6 +224,7 @@ TODO* fix bug in parse "::Regex_Match::"
 				result=1;	
 				break;
     		}
+
 
 }
 

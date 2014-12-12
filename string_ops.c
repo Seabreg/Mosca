@@ -3,6 +3,7 @@
 
 #define array_elements(array) (sizeof(array) / sizeof *(array))
 
+
 char  *ClearStr(char* charBuffer,int num) 
 {
 	char *tmp=(charBuffer + num);
@@ -13,7 +14,7 @@ char  *ClearStr(char* charBuffer,int num)
 // DFA to parse egg module
 int parse_eggs(char** p, char** lex)
 {
-    char* marker;
+    char* marker=NULL;
 
     for (;;) 
     {
