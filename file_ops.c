@@ -56,13 +56,13 @@ char *ReadLines(char * NameFile)
 	}
 
 	char *lineBuffer=xcalloc(1,1); 
-	char line[512];
-	memset(line,0,511);
+	char line[4096];
+	memset(line,0,4095);
 
-	while( fgets(line,sizeof line,arq) )  
+	while( fgets(line,sizeof line-1,arq) )  
 	{
-		lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+strlen(line)+2);
-		strncat(lineBuffer,line,strlen(lineBuffer)-1);
+		lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+strlen(line));
+		strncat(lineBuffer,line,strlen(line)-1);
 	}
 
  
