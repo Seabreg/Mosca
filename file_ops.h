@@ -18,7 +18,6 @@
 
 
 char log_file[256];
-int char_type_counter(char *string,char type);
 int WriteFile(char *file,char *str);
 char *ReadLines(char * NameFile);
 char *Search_for(char * NameFile,char *regex);

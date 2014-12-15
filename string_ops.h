@@ -11,6 +11,7 @@ enum {
   TITLE,REFERENCE,DESCRIPTION,RELEVANCE,MATCH, END
 };
 
+void Dead_Space(char *str); 
 char  *ClearStr(char* charBuffer,int num);
 int parse_eggs(char** p,char** lex);
 int match_test(const char *string,const char *expression);

@@ -2,20 +2,6 @@
 #include "mem_ops.h"
 #include "string_ops.h"
 
-int char_type_counter(char *string,char type)
-{
-	int counter=0;
- 
-	while(*string != '\0')
-	{
-		if(*string==type) 
-			counter++;
-		string++;
-	}
-  
-	return counter;
-}
-
 int WriteFile(char *file,char *str)
 {
 	FILE *arq;
@@ -99,13 +85,17 @@ char *Search_for(char * NameFile,char *regex)
 	}
 
 	char *lineBuffer=xcalloc(1,1); 
-	char line[2048],tmpline[2128];
-	memset(line,0,1023);
+	char line[2048],line2[2048],tmpline[2128];
 
-	while( fgets(line,1023,arq) )  
+	while( fgets(line,2048,arq) )  
 	{
-
-		match=match_test(line,regex);
+// don't need match tab  \t
+		memset(line2,0,2048);
+		strcat(line2," ");
+		strncat(line2,line,2047-sizeof(char));
+		Dead_Space(line2);
+//DEBUG("%s",line2);
+		match=match_test(line2,regex);
 
 		if(match)
 		{
@@ -128,7 +118,8 @@ char *Search_for(char * NameFile,char *regex)
 
 	lineBuffer[strlen(lineBuffer)-1]='\0';
 
-	free(lineBuffer);
+	if(lineBuffer!=NULL)
+		free(lineBuffer);
 
 	return lineBuffer;
 }
