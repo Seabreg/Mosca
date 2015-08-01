@@ -17,7 +17,7 @@
  ::Description::( notification at possible XSS )::
  ::Relevance::( High ):: 
  ::Reference::( http://guides.rubyonrails.org/security.html#cross-site-scripting-xss )::
- ::Match::( raw|html_safe|^== )::
+ ::Match::( raw|html_safe|^==|^!= )::
 
  ::Title::( SHow inputs like get/post etc... )::	
  ::Description::( notification )::
