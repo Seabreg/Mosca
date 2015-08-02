@@ -1,7 +1,7 @@
 Mosca
 =====
 
-Just another Simple static analysis tool, V0.001  Beta
+Just another Simple static analysis tool, V0.002  Beta
 
 Simple example how  to automate analysis of some codes...
 
