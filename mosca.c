@@ -25,7 +25,7 @@ void init_banner_mosca()
 "       .'(_I_)`.   |  | |__| ___] |___ |  |   coded by Cooler_\n"
 "           \"       \n"
  YELLOW
-"    Static analysis tool  v0.01 Beta\n"
+"    Static analysis tool  v0.02 Beta\n"
  LAST
 "+-----------------------------------------------------------------+\n"
 "Options: \n"
