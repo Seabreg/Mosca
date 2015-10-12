@@ -30,3 +30,10 @@
  ::Relevance::( High ):: 
  ::Reference::( https://www.owasp.org/index.php/Testing_for_Stack_Overflow )::
  ::Match::# mysql_query\s*\(.*\$.*\)|pg_query\s*\(.*\$.*\)|pg_send_query\s*\(.*\$.*\)|pg_execute\s*\(.*\$.*\)|WHERE|FROM|SELECT|UPDATE|DELETE|INSERT) #::
+
+ ::Title::( Object injection )::	
+ ::Description::( Do not use unserialize function with user-supplied input. Unserialization can result in code being loaded and executed due to object instantiation and autoloading. )::
+ ::Relevance::( High ):: 
+ ::Reference::( https://www.owasp.org/index.php/PHP_Object_Injection )::
+ ::Match::# unserialize\s?\( #::
+ 
