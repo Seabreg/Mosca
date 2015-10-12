@@ -43,7 +43,7 @@
  ::Reference::( https://en.wikipedia.org/wiki/HTTP_header_injection )::
  ::Match::# _SERVER\[\s*('|")HTTP_HOST('|")\s*\]|header\s?(\(|'|\"|$).*\$.* #::
  
-  ::Title::( Logic fail )::	
+ ::Title::( Logic fail )::	
  ::Description::(Possible logic bug that could lead to security bugs. Assigning a static string to a variable in an if condition is not normal and is likely a mistake. )::
  ::Relevance::( High ):: 
  ::Reference::( https://en.wikipedia.org/wiki/Logic_error)::
