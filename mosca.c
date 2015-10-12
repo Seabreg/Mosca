@@ -25,7 +25,7 @@ void init_banner_mosca()
 "       .'(_I_)`.   |  | |__| ___] |___ |  |   coded by Cooler_\n"
 "           \"       \n"
  YELLOW
-"    Static analysis tool  v0.02 Beta\n"
+"    Static analysis tool to find bugs like a grep unix command  v0.02 \n"
  LAST
 "+-----------------------------------------------------------------+\n"
 "Options: \n"
