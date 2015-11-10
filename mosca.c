@@ -1,7 +1,7 @@
 /*
 Date: 06/12/2014
 Author: Cooler_
-Contact: c00f3r@gmail.com
+Contact: coolerlair@gmail.com
 License: GPL3 read file LICENSE.txt
 
 */
