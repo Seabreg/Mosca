@@ -29,14 +29,14 @@ void init_banner_mosca()
  LAST
 "+-----------------------------------------------------------------+\n"
 "Options: \n"
-"--egg = Load module to make analysis '--egg /full/path/eggs/php_top_fails.php' don't use '../path' \n"
-"--path = Path to open and make recursive search \n"
+"--egg = Load module to make analysis '--egg eggs/php_top_fails.php' don't use '../path' \n"
+"--path = Path to open and make recursive search, use full path don't use ../path \n"
 "--ext = File extension to search example; get only C files '\\.c$' \n"
 "--log = File to save results \n"
 YELLOW
 "Example: \n"
 LAST
-"$ ./mosca --egg egg/php_fails.egg --path home/user/blog_php --ext \"\\\\.php$\" --log reports.txt \n"
+"$ ./mosca --egg egg/php_fails.egg --path /home/user/blog_php --ext \"\\\\.php$\" --log reports.txt \n"
  );
  puts(LAST);
 }
