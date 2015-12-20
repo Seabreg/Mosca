@@ -132,9 +132,15 @@ int main(int argc, char ** argv)
      					puts(RED);
      					DEBUG("Option -%c requires an argument.\n", optopt); 
      					puts(LAST);
-     					exit(0);
+     					exit(1);
     				}
 				break;
+
+			default:	
+				init_banner_mosca();
+				DEBUG("Need more arguments.\n");
+				exit(1);
+
   		}
 
 		if(pack[3]==NULL)
