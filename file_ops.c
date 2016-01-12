@@ -128,8 +128,8 @@ char *Search_for(char * NameFile,char *regex)
 
 	lineBuffer[strlen(lineBuffer)-1]='\0';
 
-	if(lineBuffer!=NULL)
-		free(lineBuffer);
+//	if(lineBuffer!=NULL)
+//		free(lineBuffer);
 
 	return lineBuffer;
 }
@@ -139,7 +139,7 @@ void fly_to_analyse(char *path, char *config)
 {
 	char *p = ReadLines(config);
 	char *last=p;
-	char *result2=NULL;
+//	char *result2=NULL;
 	char title[128],description[512],reference[512],match[128],relevance[512];	
 	int result=0,sz=0;
 
@@ -191,7 +191,7 @@ TODO* fix bug when test first rule of egg file
 					strcpy(match,ClearStr(match,10));
 
 
-					result2=Search_for(path,match);
+					char *result2=Search_for(path,match);
 
 // TODO* need validate before print out
 					if(strlen(result2)>8)
@@ -201,23 +201,31 @@ TODO* fix bug when test first rule of egg file
 						if(log_file != NULL)
 						{
 // TODO* call one time write()... optimize
-							WriteFile(log_file," Path: ");
-							WriteFile(log_file,path);
-							WriteFile(log_file,"\n Module: ");
-							WriteFile(log_file,config);
-							WriteFile(log_file,"\n Title: ");
-							WriteFile(log_file,title);
-							WriteFile(log_file,"\n Description: ");
-							WriteFile(log_file,description);
-							WriteFile(log_file,"\n reference: ");
-							WriteFile(log_file,reference);
-							WriteFile(log_file,"\n Match: ");
-							WriteFile(log_file,match);
-							WriteFile(log_file,"\n Result: \n");
-							WriteFile(log_file,result2);
+							FILE *arq;
+ 
+							arq=fopen(log_file,"a"); 
+
+							if ( arq == NULL ) 
+							{
+								DEBUG("error in XML file %s",log_file); 
+								perror("Error ");
+								exit(-1);
+							}
+
+							fprintf(arq,"<report_mosca>\n <Path>%s</Path>\n <Module>%s</Module>\n <Title>%s</Title>\n <Description>%s</Description>\n <Reference>%s</Reference>\n <Match>%s</Match>\n <Result>%s</Result>\n</report_mosca>\n\n",path,config,title,description,reference,match,result2); 
+
+							if( fclose(arq) == EOF )
+							{
+								DEBUG("error in Write() file %s",log_file);
+								perror("Error ");
+								exit(-1);
+							}
+							arq=NULL;
 		 
 						}
 					}
+			//		memset(result2,0,strlen(result2)-1);
+					xfree((void **)&result2);
 				break;
 
 
