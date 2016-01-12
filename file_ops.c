@@ -2,33 +2,6 @@
 #include "mem_ops.h"
 #include "string_ops.h"
 
-int WriteFile(char *file,char *str)
-{
-	FILE *arq;
- 
-	arq=fopen(file,"a"); 
-
-	if ( arq == NULL ) 
-	{
-//		fclose(arq);
-		DEBUG("error in WriteFile() %s",file); 
-		perror("Error ");
-		exit(-1);
-	}
-
-	fprintf(arq,"%s\n",str); 
-
-	if( fclose(arq) == EOF )
-	{
-		DEBUG("error in Write() file %s",file);
-		perror("Error ");
-		exit(-1);
-	}
-	arq=NULL;
- 
-
-	return 1;
-}
 
 //read lines of file
 char *ReadLines(char * NameFile)
@@ -224,7 +197,6 @@ TODO* fix bug when test first rule of egg file
 		 
 						}
 					}
-			//		memset(result2,0,strlen(result2)-1);
 					xfree((void **)&result2);
 				break;
 
