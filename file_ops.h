@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include <limits.h>
+#include <errno.h>
 #include "mem_ops.h"
 
 // colors macros 

@@ -12,7 +12,8 @@ int WriteFile(char *file,char *str)
 	{
 //		fclose(arq);
 		DEBUG("error in WriteFile() %s",file); 
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 
 	fprintf(arq,"%s\n",str); 
@@ -20,7 +21,8 @@ int WriteFile(char *file,char *str)
 	if( fclose(arq) == EOF )
 	{
 		DEBUG("error in Write() file %s",file);
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 	arq=NULL;
  
@@ -40,7 +42,8 @@ char *ReadLines(char * NameFile)
 	{
 //		fclose(arq);
 		DEBUG("error in to open() file"); 	 
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 
 	char *lineBuffer=xcalloc(1,1); 
@@ -57,7 +60,8 @@ char *ReadLines(char * NameFile)
 	if( fclose(arq) == EOF )
 	{
 		DEBUG("Error in close() file %s",NameFile);
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 
 	arq=NULL;
@@ -82,9 +86,11 @@ char *Search_for(char * NameFile,char *regex)
 // todo think implement fcntl() ,toctou mitigation...
 	if( arq == NULL )
 	{
+		
 //		fclose(arq);
 		DEBUG("error in to open() file"); 	 
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 
 	char *lineBuffer=xcalloc(1,1); 
@@ -114,7 +120,8 @@ char *Search_for(char * NameFile,char *regex)
 	if( fclose(arq) == EOF )
 	{
 		DEBUG("Error in close() file %s",NameFile);
-		exit(1);
+		perror("Error ");
+		exit(-1);
 	}
 
 	arq=NULL;
