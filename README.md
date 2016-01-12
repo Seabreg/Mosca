@@ -1,10 +1,12 @@
 ##Mosca
 =====
 
- Static analysis tool to find bugs like a grep unix command, Version 0.02  
+ Static analysis tool to find bugs like a grep unix command, Version 0.03  
 *egg modules is a config to find to vulnerabilities
 
 *you can use at C, PHP, javascript, ruby etc
+
+*Save results at XML file
 
 *create your own modules etc...
 
