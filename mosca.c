@@ -36,7 +36,7 @@ void init_banner_mosca()
 YELLOW
 "Example: \n"
 LAST
-"$ ./mosca --egg egg/php_fails.egg --path /home/user/blog_php --ext \"\\\\.php$\" --log reports.txt \n"
+"$ ./mosca --egg eggs/php_fails.egg --path /home/user/blog_php --ext \"\\\\.php$\" --log reports.txt \n"
  );
  puts(LAST);
 }
