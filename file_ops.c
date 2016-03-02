@@ -14,7 +14,7 @@ char *ReadLines(char * NameFile)
 	if( arq == NULL )
 	{
 //		fclose(arq);
-		DEBUG("error in to open() file"); 	 
+		DEBUG("The specified module could not be found or can not be opened"); 	 
 		perror("Error ");
 		exit(-1);
 	}
