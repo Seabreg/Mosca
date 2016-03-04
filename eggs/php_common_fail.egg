@@ -37,6 +37,12 @@
  ::Reference::( https://www.owasp.org/index.php/PHP_Object_Injection )::
  ::Match::# unserialize\s?\( #::
  
+  ::Title::( Autoload Injection ):: 	
+ ::Description::( Autoload can lead to a Local and Remote file injection in PHP5 OOP ):: 
+ ::Relevance::( Medium ):: 
+ ::Reference::( http://php.net/language.oop5.autoload  ):: 
+ ::Match::# spl_autoload_call|class_exists|interface_exists|method_exists|property_exists|is_subclass_of|__autoload|__wakeup|__destruct #::
+ 
  ::Title::( Header injection )::	
  ::Description::( HTTP_HOST is remotely set via Host Header and poor usage often leads to injection or redirection attacks. )::
  ::Relevance::( High ):: 
