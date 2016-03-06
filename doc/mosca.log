@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.6.17)  12 OCT 2015 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.12.25)  5 MAR 2016 21:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **mosca.tex
 (./mosca.tex
 LaTeX2e <2011/06/27>
-Babel <3.9k> and hyphenation patterns for 3 languages loaded.
+Babel <3.9k> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasercs.sty
 Package: beamerbasercs 2013/12/25 (rcs-revision 31cc758a62ae)
@@ -854,26 +854,60 @@ File: pst-node.tex 2014/03/25 1.33 `pst-node' (tvz,hv)
 Package: multimedia 2012/05/02 ver 0.02
 \mm@movie=\count188
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
-Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip61
-\subfigcapskip=\skip62
-\subfigcaptopadj=\dimen219
-\subfigbottomskip=\skip63
-\subfigcapmargin=\dimen220
-\subfiglabelskip=\skip64
-\c@subfigure=\count189
-\c@lofdepth=\count190
-\c@subtable=\count191
-\c@lotdepth=\count192
 
-****************************************
-* Local config file subfigure.cfg used *
-****************************************
-(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip65
-\subfig@bottom=\skip66
-)
+! LaTeX Error: File `subfigure.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+
+! LaTeX Error: Unknown option `normal' for package `subfigure'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \setlength
+              {\subfigcapskip}{-.5em}
+? 
+
+! LaTeX Error: Unknown option `tight' for package `subfigure'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \setlength
+              {\subfigcapskip}{-.5em}
+? 
+
+! LaTeX Error: Unknown option `center' for package `subfigure'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \setlength
+              {\subfigcapskip}{-.5em}
+? 
+! Undefined control sequence.
+<argument> \subfigcapskip 
+                          
+l.7 \setlength{\subfigcapskip}{-.5em}
+                                     
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \setlength{\subfigcapskip}{-.5em}
+                                     
+? 
+
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/theme/compatibility/beam
 erthemesplit.sty
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/color/beamercolorthemewh
@@ -958,16 +992,16 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count193
-\scratchdimen=\dimen221
+\scratchcounter=\count189
+\scratchdimen=\dimen219
 \scratchbox=\box58
-\nofMPsegments=\count194
-\nofMParguments=\count195
+\nofMPsegments=\count190
+\nofMParguments=\count191
 \everyMPshowfont=\toks54
-\MPscratchCnt=\count196
-\MPscratchDim=\dimen222
-\MPnumerator=\count197
-\makeMPintoPDFobject=\count198
+\MPscratchCnt=\count192
+\MPscratchDim=\dimen220
+\MPnumerator=\count193
+\makeMPintoPDFobject=\count194
 \everyMPtoPDFconversion=\toks55
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -994,7 +1028,7 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count199
+\c@section@level=\count195
 )
 LaTeX Info: Redefining \ref on input line 19.
 LaTeX Info: Redefining \pageref on input line 19.
@@ -1039,6 +1073,9 @@ File: images/mosca.jpg Graphic file (type jpg)
  <use images/mosca.jpg>
 Package pdftex.def Info: images/mosca.jpg used on input line 21.
 (pdftex.def)             Requested size: 85.35826pt x 78.95592pt.
+
+Overfull \vbox (12.0pt too high) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <4> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 21.
  [1
@@ -1062,13 +1099,19 @@ File: omsphv.fd
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
 
-<images/tony.png, id=28, 387.69844pt x 368.87813pt>
+! Undefined control sequence.
+\beamer@doifinframe ...}[t] \centering \subfigure 
+                                                  []{ \includegraphics [widt...
+l.38 \end{frame}
+                
+? 
+<images/tony.png, id=29, 387.69844pt x 368.87813pt>
 File: images/tony.png Graphic file (type png)
  <use images/tony.png>
 Package pdftex.def Info: images/tony.png used on input line 38.
 (pdftex.def)             Requested size: 113.81102pt x 108.28337pt.
 
-Overfull \vbox (37.9051pt too high) detected at line 38
+Overfull \vbox (20.07166pt too high) detected at line 38
  []
 
 [2
@@ -1087,7 +1130,7 @@ Overfull \hbox (16.74936pt too wide) in paragraph at lines 48--48
 
 ] [6
 
-] <images/codeview.png, id=60, 751.80875pt x 261.97874pt>
+] <images/codeview.png, id=61, 751.80875pt x 261.97874pt>
 File: images/codeview.png Graphic file (type png)
 
 <use images/codeview.png>
@@ -1134,21 +1177,22 @@ Package rerunfilecheck Info: File `mosca.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 133.
  ) 
 Here is how much of TeX's memory you used:
- 19670 strings out of 495001
- 359965 string characters out of 6180680
- 455211 words of memory out of 5000000
- 22406 multiletter control sequences out of 15000+600000
- 16727 words of font info for 31 fonts, out of 8000000 for 9000
- 16 hyphenation exceptions out of 8191
+ 19520 strings out of 495025
+ 357895 string characters out of 6181514
+ 453201 words of memory out of 5000000
+ 22252 multiletter control sequences out of 15000+600000
+ 14967 words of font info for 29 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
  48i,16n,59p,563b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/helvetic/uhvr8a.pfb>
-Output written on mosca.pdf (11 pages, 638638 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/helvetic/uhvr8a.pfb>
+Output written on mosca.pdf (11 pages, 648697 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
  23 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
