@@ -6,47 +6,41 @@
 //read lines of file
 char *ReadLines(char * NameFile)
 {
-	FILE * arq=NULL;
+	FILE * fh;
+	char *buffer=NULL;
 
-	arq = fopen(NameFile, "rx");
+	fh = fopen(NameFile, "rb");
 
-// todo think implement fcntl() ,toctou mitigation...
-	if( arq == NULL )
+	if( fh == NULL )
 	{
-//		fclose(arq);
-		DEBUG("The specified module could not be found or can not be opened"); 	 
-		perror("Error ");
-		exit(-1);
+
+		printf("error in to open() file"); 	 
+		exit(1);
 	}
 
-	char *lineBuffer=xcalloc(1,1); 
-	char line[4096];
-	memset(line,0,4095);
+	fseek(fh, 0L, SEEK_END);
+    	long s = ftell(fh);
+    	rewind(fh);
+    	buffer = malloc(s);
 
-	while( fgets(line,sizeof line-1,arq) )  
-	{
-		lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+strlen(line));
-		strncat(lineBuffer,line,strlen(line)-1);
-	}
+    	if ( buffer != NULL )
+    	{
+      		fread(buffer, s, 1, fh);
+      		fwrite(buffer, s, 1, stdout);
+    	}
 
  
-	if( fclose(arq) == EOF )
+	if( fclose(fh) == EOF )
 	{
-		DEBUG("Error in close() file %s",NameFile);
-		perror("Error ");
-		exit(-1);
+		printf("Error in close() file %s",NameFile);
+		exit(1);
 	}
 
-	arq=NULL;
+	fh=NULL;
 
-	lineBuffer[strlen(lineBuffer)-1]='\0';
-
-	char *tmp=lineBuffer;
-
-	xfree((void **)&lineBuffer);
-
-	return tmp;
+	return buffer;
 }
+
 
 //read lines of file
 char *Search_for(char * NameFile,char *regex)
@@ -55,12 +49,11 @@ char *Search_for(char * NameFile,char *regex)
 	int match=0,count=1;
 
 	arq = fopen(NameFile, "rx");
-//DEBUG("regex %s  name file %s \n",regex,NameFile);
+
 // todo think implement fcntl() ,toctou mitigation...
 	if( arq == NULL )
 	{
 		
-//		fclose(arq);
 		DEBUG("error in to open() file"); 	 
 		perror("Error ");
 		exit(-1);
@@ -69,14 +62,14 @@ char *Search_for(char * NameFile,char *regex)
 	char *lineBuffer=xcalloc(1,1); 
 	char line[2048],line2[2048],tmpline[2128];
 
-	while( fgets(line,2048,arq) )  
+	while( fgets(line,2047,arq) )  
 	{
 // don't need match tab  \t
-		memset(line2,0,2048);
+		memset(line2,0,2047);
 		strcat(line2," ");
 		strncat(line2,line,2047-sizeof(char));
 		Dead_Space(line2);
-//DEBUG("%s",line2);
+
 		match=match_test(line2,regex);
 
 		if(match)
@@ -101,8 +94,6 @@ char *Search_for(char * NameFile,char *regex)
 
 	lineBuffer[strlen(lineBuffer)-1]='\0';
 
-//	if(lineBuffer!=NULL)
-//		free(lineBuffer);
 
 	return lineBuffer;
 }
@@ -113,7 +104,7 @@ void fly_to_analyse(char *path, char *config)
 	char *p = ReadLines(config);
 	char *last=p;
 //	char *result2=NULL;
-	char title[128],description[512],reference[512],match[128],relevance[512];	
+	char title[128],description[512],reference[512],match[1024],relevance[512];	
 	int result=0,sz=0;
 
 
@@ -159,8 +150,8 @@ TODO* fix bug when test first rule of egg file
 */
 			case MATCH:
 					sz = p - last;
-					memset(match,0,127);
-					snprintf(match,127,"%.*s", sz, last);
+					memset(match,0,1023);
+					snprintf(match,1023,"%.*s", sz, last);
 					strcpy(match,ClearStr(match,10));
 
 
@@ -206,6 +197,9 @@ TODO* fix bug when test first rule of egg file
 				break;
     		}
 
+		memset(p,0,strlen(p));
+		
+				
 
 }
 
