@@ -21,16 +21,19 @@ char *ReadLines(char * NameFile)
 		
 	}
 
-	fseek(fh, 0L, SEEK_END);
-    	long s = ftell(fh);
-    	rewind(fh);
-    	buffer = xmalloc(s);
-
-    	if ( buffer != NULL )
-    	{
-      		fread(buffer, s, 1, fh);
+	if(fseek(fh, 0L, SEEK_END)==0)
+	{
+    		long s = ftell(fh);
+    		rewind(fh);
+    		buffer = xmalloc(s);
+	
+    		if ( buffer != NULL )
+    		{
+      			if(!fread(buffer, s, 1, fh))
+				DEBUG("error \n");
     //  		fwrite(buffer, s, 1, stdout);
-    	}
+    		}
+	}
 
  
 	if( fclose(fh) == EOF )
@@ -66,6 +69,7 @@ char *Search_for(char * NameFile,char *regex)
 
 		if(match)
 		{
+			Dead_Space(ptr);
 			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2256);
 			snprintf(tmpline,2127," Line: %ld -  %s\n",count,ptr);
 			strncat(lineBuffer,tmpline,2255);
@@ -75,7 +79,7 @@ char *Search_for(char * NameFile,char *regex)
 		count++;
 	}
 
- 	xfree((void **)&buffer2);
+// 	xfree((void **)&buffer2);
 
 	return lineBuffer;
 }
