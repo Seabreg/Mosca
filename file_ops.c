@@ -15,8 +15,10 @@ char *ReadLines(char * NameFile)
 	if( fh == NULL )
 	{
 
-		DEBUG("error in to open() file"); 	 
-		exit(1);
+		DEBUG("error in to open() file");
+		perror("Error ");
+		exit(-1); 	 
+		
 	}
 
 	fseek(fh, 0L, SEEK_END);
