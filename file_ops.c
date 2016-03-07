@@ -42,7 +42,7 @@ char *ReadLines(char * NameFile)
 	fh=NULL;
 
 	
-	return buffer;;
+	return buffer;
 }
 
 
