@@ -3,6 +3,7 @@
 #include "string_ops.h"
 
 
+
 //read lines of file
 char *ReadLines(char * NameFile)
 {
@@ -42,6 +43,8 @@ char *ReadLines(char * NameFile)
 }
 
 
+
+
 //read lines of file
 char *Search_for(char * NameFile,char *regex)
 {
@@ -49,37 +52,35 @@ char *Search_for(char * NameFile,char *regex)
 	int match=0,count=1;
 
 	arq = fopen(NameFile, "rx");
-
+//DEBUG("regex %s  name file %s \n",regex,NameFile);
 // todo think implement fcntl() ,toctou mitigation...
 	if( arq == NULL )
 	{
 		
+//		fclose(arq);
 		DEBUG("error in to open() file"); 	 
 		perror("Error ");
 		exit(-1);
 	}
 
-	char *lineBuffer=xcalloc(1,1);  
+	char *lineBuffer=xcalloc(1,1); 
 	char line[2048],line2[2048],tmpline[2128];
-	int len_tmp=2256;
 
-	while( fgets(line,2047,arq) )  
+	while( fgets(line,2048,arq) )  
 	{
 // don't need match tab  \t
-		memset(line2,0,2047);
+		memset(line2,0,2048);
 		strcat(line2," ");
 		strncat(line2,line,2047-sizeof(char));
 		Dead_Space(line2);
-
+//DEBUG("%s",line2);
 		match=match_test(line2,regex);
 
 		if(match)
 		{
-			lineBuffer=xrealloc(lineBuffer,len_tmp);
-			memset(tmpline,0,2127);
-			snprintf(tmpline,2127,"\tLine: %d -  %s",count,line);
+			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2128);
+			snprintf(tmpline,2127," Line: %d -  %s",count,line);
 			strncat(lineBuffer,tmpline,2127);
-			len_tmp+=len_tmp;
 		}
 
 		count++;
@@ -94,9 +95,6 @@ char *Search_for(char * NameFile,char *regex)
 	}
 
 	arq=NULL;
-
-//	if(lineBuffer!=NULL)
-//		lineBuffer[strlen(lineBuffer)-1]='\0';
 
 
 	return lineBuffer;
