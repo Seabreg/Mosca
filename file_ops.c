@@ -1,7 +1,7 @@
 #include "file_ops.h"
 #include "mem_ops.h"
 #include "string_ops.h"
-
+#include <alloca.h>
 
 
 //read lines of file
@@ -29,7 +29,7 @@ char *ReadLines(char * NameFile)
     	if ( buffer != NULL )
     	{
       		fread(buffer, s, 1, fh);
-      		fwrite(buffer, s, 1, stdout);
+    //  		fwrite(buffer, s, 1, stdout);
     	}
 
  
@@ -41,7 +41,8 @@ char *ReadLines(char * NameFile)
 
 	fh=NULL;
 
-	return buffer;
+	
+	return buffer;;
 }
 
 
@@ -50,54 +51,31 @@ char *ReadLines(char * NameFile)
 //read lines of file
 char *Search_for(char * NameFile,char *regex)
 {
-	FILE * arq;
-	int match=0,count=1;
+	int match=0;
+	long int count=0;
 
-	arq = fopen(NameFile, "rx");
-//DEBUG("regex %s  name file %s \n",regex,NameFile);
-// todo think implement fcntl() ,toctou mitigation...
-	if( arq == NULL )
+	char *lineBuffer=xcalloc(1,1),*buffer2=ReadLines(NameFile);
+	char *ptr= strtok(buffer2,"\n");
+	char tmpline[2128];
+
+
+	while(ptr!=NULL)
 	{
-		
-//		fclose(arq);
-		DEBUG("error in to open() file"); 	 
-		perror("Error ");
-		exit(-1);
-	}
-
-	char *lineBuffer=xcalloc(1,1); 
-	char line[2048],line2[2048],tmpline[2128];
-
-	while( fgets(line,2048,arq) )  
-	{
-// don't need match tab  \t
-		memset(line2,0,2048);
-		strcat(line2," ");
-		strncat(line2,line,2047-sizeof(char));
-		Dead_Space(line2);
-//DEBUG("%s",line2);
-		match=match_test(line2,regex);
+	
+		match=match_test(ptr,regex);
 
 		if(match)
 		{
-			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2128);
-			snprintf(tmpline,2127," Line: %d -  %s",count,line);
-			strncat(lineBuffer,tmpline,2127);
+			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2256);
+			snprintf(tmpline,2127," Line: %ld -  %s\n",count,ptr);
+			strncat(lineBuffer,tmpline,2255);
 		}
-
+		
+		ptr = strtok (NULL, "\n");
 		count++;
 	}
 
- 
-	if( fclose(arq) == EOF )
-	{
-		DEBUG("Error in close() file %s",NameFile);
-		perror("Error ");
-		exit(-1);
-	}
-
-	arq=NULL;
-
+ 	xfree((void **)&buffer2);
 
 	return lineBuffer;
 }
@@ -202,6 +180,10 @@ TODO* fix bug when test first rule of egg file
 				break;
     		}
 
+		
+
+				
+			
 }
 
 
