@@ -14,14 +14,14 @@ char *ReadLines(char * NameFile)
 	if( fh == NULL )
 	{
 
-		printf("error in to open() file"); 	 
+		DEBUG("error in to open() file"); 	 
 		exit(1);
 	}
 
 	fseek(fh, 0L, SEEK_END);
     	long s = ftell(fh);
     	rewind(fh);
-    	buffer = malloc(s);
+    	buffer = xmalloc(s);
 
     	if ( buffer != NULL )
     	{
@@ -32,7 +32,7 @@ char *ReadLines(char * NameFile)
  
 	if( fclose(fh) == EOF )
 	{
-		printf("Error in close() file %s",NameFile);
+		DEBUG("Error in close() file %s",NameFile);
 		exit(1);
 	}
 
@@ -59,8 +59,9 @@ char *Search_for(char * NameFile,char *regex)
 		exit(-1);
 	}
 
-	char *lineBuffer=xcalloc(1,1); 
+	char *lineBuffer=xcalloc(1,1);  
 	char line[2048],line2[2048],tmpline[2128];
+	int len_tmp=2256;
 
 	while( fgets(line,2047,arq) )  
 	{
@@ -74,9 +75,11 @@ char *Search_for(char * NameFile,char *regex)
 
 		if(match)
 		{
-			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2128);
-			snprintf(tmpline,2127," Line: %d -  %s",count,line);
+			lineBuffer=xrealloc(lineBuffer,len_tmp);
+			memset(tmpline,0,2127);
+			snprintf(tmpline,2127,"\tLine: %d -  %s",count,line);
 			strncat(lineBuffer,tmpline,2127);
+			len_tmp+=len_tmp;
 		}
 
 		count++;
@@ -92,7 +95,8 @@ char *Search_for(char * NameFile,char *regex)
 
 	arq=NULL;
 
-	lineBuffer[strlen(lineBuffer)-1]='\0';
+//	if(lineBuffer!=NULL)
+//		lineBuffer[strlen(lineBuffer)-1]='\0';
 
 
 	return lineBuffer;
@@ -158,6 +162,7 @@ TODO* fix bug when test first rule of egg file
 					char *result2=Search_for(path,match);
 
 // TODO* need validate before print out
+					if(result2!=NULL)
 					if(strlen(result2)>8)
 					{
 						fprintf(stdout,"\n-------------------\n %sTitle:%s  %s  \n %sDescription:%s %s \n %sRelevance:%s %s \n %sReference:%s %s \n %sMatch:%s %s  \n%s%s%s\n",YELLOW,LAST,title,YELLOW,LAST,description,YELLOW,LAST,relevance,YELLOW,LAST,reference,YELLOW,LAST,match,CYAN,result2,LAST);
@@ -196,10 +201,6 @@ TODO* fix bug when test first rule of egg file
 				result=1;	
 				break;
     		}
-
-		memset(p,0,strlen(p));
-		
-				
 
 }
 
