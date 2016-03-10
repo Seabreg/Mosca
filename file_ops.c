@@ -26,7 +26,8 @@ char *ReadLines(char * NameFile)
     		long s = ftell(fh);
     		rewind(fh);
     		buffer = xmalloc(s);
-	
+//		memset(buffer,0,s-1);	
+
     		if ( buffer != NULL )
     		{
       			if(!fread(buffer, s, 1, fh))
@@ -57,19 +58,19 @@ char *Search_for(char * NameFile,char *regex)
 	int match=0;
 	long int count=0;
 
-	char *lineBuffer=xcalloc(1,1),*buffer2=ReadLines(NameFile);
+	char *lineBuffer=xcalloc(1,1);
+	char *buffer2=ReadLines(NameFile);
 	char *ptr= strtok(buffer2,"\n");
 	char tmpline[2128];
 
+	Dead_Space(ptr);
 
 	while(ptr!=NULL)
 	{
-	
 		match=match_test(ptr,regex);
 
 		if(match)
 		{
-			Dead_Space(ptr);
 			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2256);
 			snprintf(tmpline,2127," Line: %ld -  %s\n",count,ptr);
 			strncat(lineBuffer,tmpline,2255);
@@ -79,7 +80,7 @@ char *Search_for(char * NameFile,char *regex)
 		count++;
 	}
 
-// 	xfree((void **)&buffer2);
+ 	xfree((void **)&ptr);
 
 	return lineBuffer;
 }
@@ -183,10 +184,6 @@ TODO* fix bug when test first rule of egg file
 				result=1;	
 				break;
     		}
-
-		
-
-				
 			
 }
 
