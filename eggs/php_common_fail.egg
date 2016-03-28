@@ -55,3 +55,9 @@
  ::Reference::( https://en.wikipedia.org/wiki/Logic_error)::
  ::Match::# if\s?\(\s?\$.*\s?(?<!\!)=\s?('|").*('|")\s?\) #::
  
+ ::Title::( wordpress functions need sanitize )::	
+ ::Description::( wordpress functions that need sanitize )::
+ ::Relevance::( Low ):: 
+ ::Reference::( https://developer.wordpress.org/reference/)::
+ ::Match::# the_title|get_the_title|the_content #::
+ 
