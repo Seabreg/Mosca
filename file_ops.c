@@ -153,7 +153,7 @@ void fly_to_analyse(char *path, char *config)
 								exit(-1);
 							}
 
-							fprintf(arq,"<report_mosca>\n <Path>%s</Path>\n <Module>%s</Module>\n <Title>%s</Title>\n <Description>%s</Description>\n <Reference>%s</Reference>\n <Match>%s</Match>\n <Result>%s</Result>\n</report_mosca>\n\n",path,config,title,description,reference,match,result2); 
+							fprintf(arq,"<report_mosca>\n <Path>%s</Path>\n <Module>%s</Module>\n <Title>%s</Title>\n <Description>%s</Description>\n <Level>%s</Level>\n <Reference>%s</Reference>\n <Match>%s</Match>\n <Result>%s</Result>\n</report_mosca>\n\n",path,config,title,description,relevance,reference,match,result2); 
 
 							if( fclose(arq) == EOF )
 							{
