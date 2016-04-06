@@ -2,13 +2,13 @@
 #include "mem_ops.h"
 #include "string_ops.h"
 #include <alloca.h>
-
+#define MAX_file_len 50000
 
 //read lines of file
 char *ReadLines(char * NameFile)
 {
 	FILE * fh;
-	char *buffer=NULL;
+	char buffer[MAX_file_len];
 
 	fh = fopen(NameFile, "rb");
 
@@ -25,14 +25,11 @@ char *ReadLines(char * NameFile)
 	{
     		long s = ftell(fh);
     		rewind(fh);
-    		buffer = xmalloc(s);
-//		memset(buffer,0,s-1);	
 
-    		if ( buffer != NULL )
+    		if ( buffer != NULL && s < MAX_file_len )
     		{
       			if(!fread(buffer, s, 1, fh))
 				DEBUG("error \n");
-    //  		fwrite(buffer, s, 1, stdout);
     		}
 	}
 
@@ -44,23 +41,20 @@ char *ReadLines(char * NameFile)
 	}
 
 	fh=NULL;
-
+	char *tmp=buffer;
 	
-	return buffer;
+	return tmp;
 }
 
 
 
 
-//read lines of file
+// search matchs in file
 char *Search_for(char * NameFile,char *regex)
 {
+        long int count=0;
 	int match=0;
-	long int count=0;
-
-	char *lineBuffer=xcalloc(1,1);
-	char *buffer2=ReadLines(NameFile);
-	char *ptr= strtok(buffer2,"\n");
+	char *lineBuffer=xcalloc(1,1), *buffer2=ReadLines(NameFile), *ptr= strtok(buffer2,"\n");
 	char tmpline[2128];
 
 	Dead_Space(ptr);
@@ -82,6 +76,7 @@ char *Search_for(char * NameFile,char *regex)
 
  	xfree((void **)&ptr);
 
+
 	return lineBuffer;
 }
 
@@ -90,20 +85,18 @@ void fly_to_analyse(char *path, char *config)
 {
 	char *p = ReadLines(config);
 	char *last=p;
-//	char *result2=NULL;
 	char title[128],description[512],reference[512],match[1024],relevance[512];	
 	int result=0,sz=0;
 
-
-
-	while(!result)
+	
+	while(!result && strlen(last)>16)
+	{
 		switch (parse_eggs(&p, &last)) 
 		{
 			case TITLE:
 					sz = p - last;
 					memset(title,0,127);
 					snprintf(title,127,"%.*s", sz, last);
-// DEBUG("%s\n",title);
 					strcpy(title,ClearStr(title,10));
 				break;
 
@@ -131,10 +124,7 @@ void fly_to_analyse(char *path, char *config)
 					snprintf(relevance,511,"%.*s", sz, last);
 					strcpy(relevance,ClearStr(relevance,14));
 				break;
-/*
-TODO* fix bug when test first rule of egg file
 
-*/
 			case MATCH:
 					sz = p - last;
 					memset(match,0,1023);
@@ -152,7 +142,6 @@ TODO* fix bug when test first rule of egg file
 
 						if(log_file != NULL)
 						{
-// TODO* call one time write()... optimize
 							FILE *arq;
  
 							arq=fopen(log_file,"a"); 
@@ -184,7 +173,9 @@ TODO* fix bug when test first rule of egg file
 				result=1;	
 				break;
     		}
-			
+		
+	}
+				
 }
 
 

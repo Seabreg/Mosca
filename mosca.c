@@ -148,6 +148,14 @@ int main(int argc, char ** argv)
 			DEBUG("error at log file");
 			exit(0);
 		}
+
+
+
+		if(pack[2]==NULL)
+		{
+			DEBUG("error at extension file");
+			exit(0);
+		}
 		
 		memset(log_file,0,255);	
 		strncpy(log_file,pack[3],255);
