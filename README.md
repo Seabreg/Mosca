@@ -3,7 +3,7 @@
 
  Static analysis tool to find bugs like a grep unix command, Version 0.05  
 
-because is not dynamic... uses static code to search... don't confuse with academic views hahaha
+because is not dynamic... uses static code to search... don't confuse with academic views hahaha 
 don'thave graph here or CFG... is a simple "grep"
 
 
