@@ -8,7 +8,9 @@
 char *ReadLines(char * NameFile)
 {
 	FILE * fh;
-	char buffer[MAX_file_len];
+	static char buffer[MAX_file_len];
+
+	memset(buffer,0,MAX_file_len-1);
 
 	fh = fopen(NameFile, "rb");
 
@@ -41,7 +43,8 @@ char *ReadLines(char * NameFile)
 	}
 
 	fh=NULL;
-	char *tmp=buffer;
+
+	char *tmp=(char *)buffer;
 	
 	return tmp;
 }
