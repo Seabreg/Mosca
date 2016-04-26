@@ -44,7 +44,7 @@ char *ReadLines(char * NameFile)
 
 	fh=NULL;
 
-	char *tmp=(char *)buffer;
+	char *tmp=buffer;
 	
 	return tmp;
 }
@@ -57,28 +57,43 @@ char *Search_for(char * NameFile,char *regex)
 {
         long int count=0;
 	int match=0;
-	char *lineBuffer=xcalloc(1,1), *buffer2=ReadLines(NameFile), *ptr= strtok(buffer2,"\n");
+	char *lineBuffer=xcalloc(1,1);
 	char tmpline[2128];
 
-	Dead_Space(ptr);
+	FILE * arq;
 
-	while(ptr!=NULL)
+	arq = fopen(NameFile, "r");
+// todo think implement fcntl() ,toctou mitigation...
+	if( arq == NULL )
 	{
-		match=match_test(ptr,regex);
+		DEBUG("error in to open() file"); 	 
+		exit(1);
+	}
+
+	char line[2127];
+
+	while( fgets(line,sizeof line,arq) )  
+	{
+		match=match_test(line,regex);
 
 		if(match)
 		{
 			lineBuffer=xrealloc(lineBuffer,strlen(lineBuffer)+2256);
-			snprintf(tmpline,2127," Line: %ld -  %s\n",count,ptr);
+			snprintf(tmpline,2127," Line: %ld -  %s\n",count,line);
 			strncat(lineBuffer,tmpline,2255);
 		}
 		
-		ptr = strtok (NULL, "\n");
 		count++;
 	}
 
- 	xfree((void **)&ptr);
+ 
+	if( fclose(arq) == EOF )
+	{
+		DEBUG("Error in close() file %s",NameFile);
+		exit(1);
+	}
 
+	arq=NULL;
 
 	return lineBuffer;
 }
@@ -86,7 +101,7 @@ char *Search_for(char * NameFile,char *regex)
 
 void fly_to_analyse(char *path, char *config)
 {
-	char *p = ReadLines(config);
+	char *p=ReadLines(config);
 	char *last=p;
 	char title[128],description[512],reference[512],match[1024],relevance[512];	
 	int result=0,sz=0;
@@ -176,9 +191,12 @@ void fly_to_analyse(char *path, char *config)
 				result=1;	
 				break;
     		}
-		
+	
+	
 	}
-				
+	
+	if(strlen(last)>16)
+		xfree((void **)&last);
 }
 
 
