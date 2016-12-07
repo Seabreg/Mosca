@@ -2,7 +2,11 @@
 #include "mem_ops.h"
 #include "string_ops.h"
 #include <alloca.h>
+<<<<<<< HEAD
 #define MAX_file_len 100000000
+=======
+#define MAX_file_len 10000000
+>>>>>>> 96dfe0b148b4e493435bc907996b39ef313d4e25
 
 //read lines of file
 char *ReadLines(char * NameFile)
