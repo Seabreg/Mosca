@@ -23,10 +23,10 @@
  ::Description::( when you use printf() function need use format string arguments )::
  ::Relevance::( High ):: 
  ::Reference::( http://en.wikipedia.org/wiki/Uncontrolled_format_string )::
- ::Match::# fprintf\s*\(stdout,[a-zA-Z0-9]*\$ ) #::
+ ::Match::# fprintf (stdout,[a-zA-Z0-9]*\$) #::
 
  ::Title::( Possible Stack Overflow strcpy() function )::	
  ::Description::( when you use strcpy() function you need some attention )::
  ::Relevance::( High ):: 
  ::Reference::( https://www.owasp.org/index.php/Testing_for_Stack_Overflow )::
- ::Match::# strcpy\( #::
+ ::Match::# strcpy|strcat|strdup|sprintf|snprintf|strncat|strncpy|read|alloca #::
