@@ -25,7 +25,7 @@ void init_banner_mosca()
 "       .'(_I_)`.   |  | |__| ___] |___ |  |   coded by Cooler_\n"
 "           \"       \n"
  YELLOW
-"    Tool to find bugs like a grep unix command  v0.07 \n"
+"    Tool to find bugs like a grep unix command  v0.08 \n"
  LAST
 "+-----------------------------------------------------------------+\n"
 "Options: \n"
