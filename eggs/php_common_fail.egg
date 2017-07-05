@@ -17,7 +17,7 @@
  ::Description::( notification at possible XSS )::
  ::Relevance::( High ):: 
  ::Reference::( http://guides.rubyonrails.org/security.html#cross-site-scripting-xss )::
- ::Match::#(echo|print|print_r|exit|die|printf|vprintf).*?\s*\$_((POST|GET)\[.*?\]|SERVER\[.?(REQUEST_URI|QUERY_STRING))#::
+ ::Match::#(echo|print|print_r|exit|die|printf|vprintf).*?\s*\$_(POST|GET|SERVER|REQUEST_URI|QUERY_STRING) #::
 
  ::Title::( SHow inputs like get/post/cookies etc... )::	
  ::Description::( notification )::
@@ -35,7 +35,7 @@
  ::Description::( Do not use unserialize function with user-supplied input. Unserialization can result in code being loaded and executed due to object instantiation and autoloading. )::
  ::Relevance::( High ):: 
  ::Reference::( https://www.owasp.org/index.php/PHP_Object_Injection )::
- ::Match::#unserialize\s?\(#::
+ ::Match::#unserialize\s?\( #::
  
  ::Title::( Autoload Injection ):: 	
  ::Description::( Autoload can lead to a Local and Remote file injection in PHP5 OOP ):: 
