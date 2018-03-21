@@ -41,4 +41,4 @@
  ::Description::( Source code with possible cert pinning )::
  ::Relevance::( Warning ):: 
  ::Reference::( https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning )::
- ::Match::#kTSKPinnedDomains|TSKPinningValidator|TrustKit|pinCertificates|validateCertificateChain|SecTrustCopyResult|SecTrustSetAnchorCertificates#::
+ ::Match::#kTSKPinnedDomains|TSKPinningValidator|TrustKit|pinCertificates|validateCertificateChain|SecTrustCopyResult|setupCertificatePinner|SecTrustSetAnchorCertificates|CertificatePinner#::
