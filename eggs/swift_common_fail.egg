@@ -1,0 +1,44 @@
+::::::::::::::::::::::::::::::::::::::::::::::::::::EGG:COMMON:SWIFT:FAILURES
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+ ::Title::( Deprecated symbols ):: 	
+ ::Description::( Very old function can be deprecated ):: 
+ ::Relevance::( Low ):: 
+ ::Reference::( https://developer.apple.com/documentation/uikit/deprecated_symbols ):: 
+ ::Match::#UIActionSheet|UIAlertView|UIDocumentMenuViewController|UILocalNotification|UIMutableUserNotificationAction|UIMutableUserNotificationCategory|UIPopoverController|UISearchDisplayController|UIStoryboardPopoverSegue|UIUserNotificationAction|UIUserNotificationCategory|UIUserNotificationSettings|UIAccelerometerDelegate|UIActionSheetDelegate|UIAlertViewDelegate|UIPopoverControllerDelegate|UISearchDisplayDelegate#:: 
+
+ ::Title::( Allow non TLS communication ):: 	
+ ::Description::( Functions to allow non https communication ):: 
+ ::Relevance::( High ):: 
+ ::Reference::( https://www.owasp.org/ ):: 
+ ::Match::#allowedInsecureSchemes|allowLocalhostRequest|GTM_ALLOW_INSECURE_REQUESTS#:: 
+
+ ::Title::( SQL query)::	
+ ::Description::( notification SQL query )::
+ ::Relevance::( Low ):: 
+ ::Reference::( https://www.owasp.org/index.php/Preventing_SQL_Injection )::
+ ::Match::#sqlite|prepare|WHERE|INSERT|SELECT|DELETE|UPDATE|ORDER|createStatement|executeQuery#::
+ 
+ ::Title::( Weak encription)::	
+ ::Description::( weak encription )::
+ ::Relevance::( Low ):: 
+ ::Reference::( https://www.owasp.org/index.php/Testing_for_Weak_Encryption_(OTG-CRYPST-004) )::
+ ::Match::#encode64|md5|MD5|MD4|RC4|RC2|DES|Blowfish|SHA-1|ECB#::
+ 
+ ::Title::( Information Leak)::	
+ ::Description::( Information  leak )::
+ ::Relevance::( Low ):: 
+ ::Reference::( https://www.owasp.org )::
+ ::Match::#senha|password|passwd|pass|secret|token|key|chave|version|\.pdf|\.doc|\.zip|\.xls#::
+ 
+ ::Title::( Jailbreak detection)::	
+ ::Description::( Source code with jailbreak detection )::
+ ::Relevance::( Warning ):: 
+ ::Reference::( https://en.wikipedia.org/wiki/IOS_jailbreaking )::
+ ::Match::#cydia|MobileSubstrate\.dylib|Icy\.app|SBSettings\.app|\/usr\/libexec\/ssh#::
+ 
+ ::Title::( Cert Pinning detected  )::	
+ ::Description::( Source code with possible cert pinning )::
+ ::Relevance::( Warning ):: 
+ ::Reference::( https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning )::
+ ::Match::#kTSKPinnedDomains|TSKPinningValidator|TrustKit|pinCertificates|validateCertificateChain#::
